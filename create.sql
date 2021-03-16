@@ -7,3 +7,4 @@ alter table caracteristique add constraint FKqq7qtyf4fh1kyr020mp8k1vbg foreign k
 alter table detailmatch add constraint FKmicgm7fjltkhdjanc5hlcl5mv foreign key (joueurs_id) references joueur (id)
 alter table detailmatch add constraint FK3w7dq0lcb8pjj6c9esmi4ogbs foreign key (matches_id) references match (id)
 alter table video add constraint FKrx7bxugdg2h5o3nclu9yv2ibi foreign key (joueur_id) references joueur (id)
+
