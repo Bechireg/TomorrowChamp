@@ -23,7 +23,7 @@ public class Joueur {
 	private String nom;
 	private String prenom;
 	private String adresse;
-	private String email;
+	private String password;
 	private String nationalite;
 	private boolean disponibilite;
 	
