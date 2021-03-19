@@ -6,8 +6,11 @@ import java.util.NoSuchElementException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.dto.JoueurRequest;
+import com.example.demo.dto.JoueurResponse;
 import com.example.demo.models.Joueur;
 import com.example.demo.repositories.JoueurRepository;
+
 
 @Service
 public class JoueurServiceImpl implements JoueurService {
@@ -43,5 +46,14 @@ public class JoueurServiceImpl implements JoueurService {
 		// TODO Auto-generated method stub
 
 	}
+
+
+	@Override
+	public JoueurResponse createJoueurEntity(JoueurRequest joueur) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 
 }

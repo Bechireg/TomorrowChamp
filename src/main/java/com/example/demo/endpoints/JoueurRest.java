@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.dto.JoueurRequest;
+import com.example.demo.dto.JoueurResponse;
 import com.example.demo.models.Joueur;
 import com.example.demo.services.JoueurService;
 
@@ -32,6 +34,11 @@ public class JoueurRest {
 	@GetMapping
 	public List<Joueur> getAll(){
 		return service.getAllJoueurs();
+	}
+	
+	@PostMapping
+	public JoueurResponse createPerson(@Valid @RequestBody JoueurRequest client) {
+		return service.createJoueurEntity(client);
 	}
 	
 	
