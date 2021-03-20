@@ -12,9 +12,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import lombok.Data;
+import lombok.Getter;
 
 @Entity
 @Data
+@Getter
 public class Joueur {
 	
 	@Id

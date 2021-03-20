@@ -9,7 +9,7 @@ import com.example.demo.models.Joueur;
 public interface JoueurService {
 	List<Joueur> getAllJoueurs();
 	JoueurResponse createJoueurEntity(JoueurRequest joueur);
-	Joueur getJoueurById(long id);
+	JoueurResponse getJoueurById(long id);
 	void deleteJoueurById(long id);
 	void saveOrUpdate(Joueur joueur);
 
