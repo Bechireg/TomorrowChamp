@@ -10,7 +10,7 @@ public interface JoueurService {
 	List<Joueur> getAllJoueurs();
 	JoueurResponse createJoueurEntity(JoueurRequest joueur);
 	JoueurResponse getJoueurById(long id);
-	void deleteJoueurById(long id);
+	JoueurResponse deleteJoueurById(long id);
 	void saveOrUpdate(Joueur joueur);
 
 }

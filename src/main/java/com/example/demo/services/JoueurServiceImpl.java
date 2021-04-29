@@ -50,8 +50,11 @@ public class JoueurServiceImpl implements JoueurService {
 	}
 
 	@Override
-	public void deleteJoueurById(long id) {
-		// TODO Auto-generated method stub
+	public JoueurResponse deleteJoueurById(long id) {
+		Optional<Joueur> joueur = repoJoueur.findById(id);
+		JoueurResponse res=new JoueurResponse(joueur.get().getNom(), joueur.get().getPrenom(), joueur.get().getAdresse(), joueur.get().getNationalite(), joueur.get().isDisponibilite());
+		repoJoueur.deleteById(id);
+		return res;
 
 	}
 
