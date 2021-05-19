@@ -3,9 +3,12 @@ package com.example.demo.endpoints;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.dto.JoueurRequest;
+import com.example.demo.dto.JoueurResponse;
 import com.example.demo.models.Joueur;
 import com.example.demo.services.JoueurService;
 
@@ -32,6 +37,11 @@ public class JoueurRest {
 	@GetMapping
 	public List<Joueur> getAll(){
 		return service.getAllJoueurs();
+	}
+	
+	@PostMapping
+	public JoueurResponse createJoueurEntity(@Valid @RequestBody JoueurRequest joueur){
+		return service.createJoueurEntity(joueur);
 	}
 	
 	
