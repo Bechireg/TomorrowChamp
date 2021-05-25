@@ -15,15 +15,15 @@ import lombok.Data;
 
 @Data
 @Entity
-public class Match {
+public class Partie {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private long id;
 	private String stade;
 	
 	@ManyToMany
-	@JoinTable(name = "detailmatch")
+	@JoinTable(name = "detailpartie")
 	@JsonIgnore
 	private List<Joueur> joueurs;
 	

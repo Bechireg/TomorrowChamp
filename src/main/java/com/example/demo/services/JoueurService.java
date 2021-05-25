@@ -11,6 +11,6 @@ public interface JoueurService {
 	JoueurResponse createJoueurEntity(JoueurRequest joueur);
 	JoueurResponse getJoueurById(long id);
 	JoueurResponse deleteJoueurById(long id);
-	void saveOrUpdate(Joueur joueur);
+	JoueurResponse saveOrUpdate(long id,JoueurRequest joueur);
 
 }

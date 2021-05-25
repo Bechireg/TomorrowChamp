@@ -16,6 +16,7 @@ public class JoueurResponse {
 	private String nom;
 	private String prenom;
 	private String adresse;
+	private String password;
 	private String nationalite;
 	private boolean disponibilite;
 	
@@ -24,9 +25,20 @@ public class JoueurResponse {
 		super();
 	}
 
-	public JoueurResponse(String nom2, String prenom2, String adresse2, String nationalite2, boolean disponibilite2) {
-		// TODO Auto-generated constructor stub
+
+
+	public JoueurResponse(String nom, String prenom, String adresse,  String nationalite,
+			boolean disponibilite) {
+		super();
+		this.nom = nom;
+		this.prenom = prenom;
+		this.adresse = adresse;
+	
+		this.nationalite = nationalite;
+		this.disponibilite = disponibilite;
 	}
+
+
 
 	public String getNom() {
 		return nom;
@@ -58,6 +70,16 @@ public class JoueurResponse {
 	public void setDisponibilite(boolean disponibilite) {
 		this.disponibilite = disponibilite;
 	}
+	
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
+	
 	
 	
 }

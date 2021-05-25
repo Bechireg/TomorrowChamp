@@ -43,8 +43,8 @@ public class JoueurServiceImpl implements JoueurService {
 			entity = opt.get();
 		else
 			throw new NoSuchElementException("Joueur with this id is not found");
-		JoueurResponse joueur = new JoueurResponse();
-		return joueur;
+		//JoueurResponse joueur = new JoueurResponse();
+		return mapper.map(entity, JoueurResponse.class);
 		
 		//return repoJoueur.findById(id).orElseThrow(()->new NoSuchElementException());
 	}
@@ -59,9 +59,33 @@ public class JoueurServiceImpl implements JoueurService {
 	}
 
 	@Override
-	public void saveOrUpdate(Joueur joueur) {
+	public JoueurResponse saveOrUpdate(long id, JoueurRequest request) {
 		// TODO Auto-generated method stub
-
+		JoueurResponse test = this.getJoueurById(id);
+		//Optional<Client> client = repos.findById(id);
+		if(request.getNom()!=null)
+			test.setNom(request.getNom());
+		if(request.getPrenom()!=null)
+			test.setPrenom(request.getPrenom());
+		if(request.getAdresse()!=null)
+			test.setAdresse(request.getAdresse());
+		if(request.getNationalite()!=null)
+			test.setNationalite(request.getNationalite());
+		
+		
+		
+		Joueur newJoueur = mapper.map(test, Joueur.class);//mapper.map(test, Client.class);
+		newJoueur.setId(id);
+		newJoueur.setPassword(test.getPassword());
+		repoJoueur.save(newJoueur);
+		test.setNom(newJoueur.getNom());
+		test.setPrenom(newJoueur.getPrenom());
+		test.setAdresse(newJoueur.getAdresse());
+		test.setNationalite(newJoueur.getNationalite());
+	
+		return test;
+		
+	
 	}
 
 
@@ -73,7 +97,4 @@ public class JoueurServiceImpl implements JoueurService {
 		JoueurResponse res=new JoueurResponse(joueur.getNom(),joueur.getPrenom(),joueur.getAdresse(),joueur.getNationalite(),joueur.isDisponibilite());
 		return res;
 	}
-
-
-
 }

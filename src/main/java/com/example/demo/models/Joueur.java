@@ -21,7 +21,7 @@ public class Joueur {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private long id;
 	private String nom;
 	private String prenom;
 	private String adresse;
@@ -36,13 +36,13 @@ public class Joueur {
 	private List<Video> videos;
 	
 	@ManyToMany(mappedBy = "joueurs", cascade = CascadeType.REMOVE)
-	private List<Match> matches;
+	private List<Partie> parties;
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -110,12 +110,12 @@ public class Joueur {
 		this.videos = videos;
 	}
 
-	public List<Match> getMatches() {
-		return matches;
+	public List<Partie> getParties() {
+		return parties;
 	}
 
-	public void setMatches(List<Match> matches) {
-		this.matches = matches;
+	public void setParties(List<Partie> parties) {
+		this.parties = parties;
 	}
 
 	

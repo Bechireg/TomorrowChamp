@@ -9,9 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,9 +42,25 @@ public class JoueurRest {
 		return service.getAllJoueurs();
 	}
 	
+	@GetMapping("/{id}")
+	public JoueurResponse getJoueurById(@PathVariable("id") long id){
+		return service.getJoueurById(id);
+	}
+	
+	
 	@PostMapping
 	public JoueurResponse createJoueurEntity(@Valid @RequestBody JoueurRequest joueur){
 		return service.createJoueurEntity(joueur);
+	}
+	
+	@DeleteMapping("/{id}")
+	public JoueurResponse deleteJoueurById(@PathVariable("id") long id) {
+		return service.deleteJoueurById(id);
+	}
+	
+	@PutMapping("/{id}")
+	public JoueurResponse updateJoueur(@PathVariable("id") long id, @RequestBody JoueurRequest request) {
+		return service.saveOrUpdate(id, request);
 	}
 	
 	

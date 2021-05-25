@@ -14,7 +14,7 @@ public class Caracteristique {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private long id;
 	private String position;
 	private String piedfort;
 	private int hauteur;
