@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -37,6 +38,10 @@ public class Joueur {
 	
 	@ManyToMany(mappedBy = "joueurs", cascade = CascadeType.REMOVE)
 	private List<Partie> parties;
+	
+	
+	@ManyToOne
+	private Scout scout;
 
 	public long getId() {
 		return id;

@@ -36,17 +36,15 @@ public class JoueurServiceImpl implements JoueurService {
 
 	@Override
 	public JoueurResponse getJoueurById(long id) {
-		// TODO Auto-generated method stub
+
 		Optional<Joueur> opt = repoJoueur.findById(id);
 		Joueur entity;
 		if(opt.isPresent())
 			entity = opt.get();
 		else
 			throw new NoSuchElementException("Joueur with this id is not found");
-		//JoueurResponse joueur = new JoueurResponse();
-		return mapper.map(entity, JoueurResponse.class);
 		
-		//return repoJoueur.findById(id).orElseThrow(()->new NoSuchElementException());
+		return mapper.map(entity, JoueurResponse.class);
 	}
 
 	@Override
@@ -60,9 +58,9 @@ public class JoueurServiceImpl implements JoueurService {
 
 	@Override
 	public JoueurResponse saveOrUpdate(long id, JoueurRequest request) {
-		// TODO Auto-generated method stub
+		
 		JoueurResponse test = this.getJoueurById(id);
-		//Optional<Client> client = repos.findById(id);
+		
 		if(request.getNom()!=null)
 			test.setNom(request.getNom());
 		if(request.getPrenom()!=null)
