@@ -13,4 +13,5 @@ public interface JoueurService {
 	JoueurResponse deleteJoueurById(long id);
 	JoueurResponse saveOrUpdate(long id,JoueurRequest joueur);
 
+	String setScoutInJoueur(long idJoueur ,long idScout );
 }

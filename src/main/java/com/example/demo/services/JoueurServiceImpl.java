@@ -11,19 +11,23 @@ import org.springframework.stereotype.Service;
 import com.example.demo.dto.JoueurRequest;
 import com.example.demo.dto.JoueurResponse;
 import com.example.demo.models.Joueur;
+import com.example.demo.models.Scout;
 import com.example.demo.repositories.JoueurRepository;
+import com.example.demo.repositories.ScoutRepository;
 
 
 @Service
 public class JoueurServiceImpl implements JoueurService {
 	
 	private JoueurRepository repoJoueur;
+	private ScoutRepository repoScout;
 	private ModelMapper mapper;
 
 	@Autowired
-	public JoueurServiceImpl(JoueurRepository repoJoueur,ModelMapper mapper) {
+	public JoueurServiceImpl(JoueurRepository repoJoueur,ModelMapper mapper,ScoutRepository repoScout) {
 		super();
 		this.repoJoueur=repoJoueur;
+		this.repoScout=repoScout;
 		this.mapper=mapper;
 	}
 	
@@ -70,8 +74,6 @@ public class JoueurServiceImpl implements JoueurService {
 		if(request.getNationalite()!=null)
 			test.setNationalite(request.getNationalite());
 		
-		
-		
 		Joueur newJoueur = mapper.map(test, Joueur.class);//mapper.map(test, Client.class);
 		newJoueur.setId(id);
 		newJoueur.setPassword(test.getPassword());
@@ -82,8 +84,35 @@ public class JoueurServiceImpl implements JoueurService {
 		test.setNationalite(newJoueur.getNationalite());
 	
 		return test;
-		
+	}
 	
+	@Override
+	public String setScoutInJoueur(long idJoueur, long idScout) {
+		Optional<Joueur> joueur=repoJoueur.findById(idJoueur);
+		if(joueur.get().isDisponibilite()) {
+		Optional<Scout> scout=repoScout.findById(idScout);
+		Scout newScout=mapper.map(scout, Scout.class);
+		
+		newScout.setId(idScout);
+		//joueur.get().setScout(newScout);
+		//joueur.get().setId(idJoueur);
+		
+		Joueur newJoueur = mapper.map(joueur, Joueur.class);
+		newJoueur.setId(idJoueur);
+		newJoueur.setAdresse(joueur.get().getAdresse());
+		newJoueur.setDisponibilite(joueur.get().isDisponibilite());
+		newJoueur.setCaracteristique(joueur.get().getCaracteristique());
+		newJoueur.setNationalite(joueur.get().getNationalite());
+		newJoueur.setNom(joueur.get().getNom());
+		newJoueur.setPrenom(joueur.get().getPrenom());
+		newJoueur.setPassword(joueur.get().getPassword());
+		newJoueur.setScout(newScout);
+		repoJoueur.save(newJoueur);
+		//repoScout.save(mapper.map(scout, Scout.class));
+		return "Joueur ajouter avec succes!";
+		}else {
+			return "Joueur indisponible !";
+		}
 	}
 
 
@@ -95,4 +124,6 @@ public class JoueurServiceImpl implements JoueurService {
 		JoueurResponse res=new JoueurResponse(joueur.getNom(),joueur.getPrenom(),joueur.getAdresse(),joueur.getNationalite(),joueur.isDisponibilite());
 		return res;
 	}
+	
+	
 }

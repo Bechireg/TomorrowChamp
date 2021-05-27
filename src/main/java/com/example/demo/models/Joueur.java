@@ -40,7 +40,7 @@ public class Joueur {
 	private List<Partie> parties;
 	
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	private Scout scout;
 
 	public long getId() {
@@ -121,6 +121,14 @@ public class Joueur {
 
 	public void setParties(List<Partie> parties) {
 		this.parties = parties;
+	}
+
+	public Scout getScout() {
+		return scout;
+	}
+
+	public void setScout(Scout scout) {
+		this.scout = scout;
 	}
 
 	

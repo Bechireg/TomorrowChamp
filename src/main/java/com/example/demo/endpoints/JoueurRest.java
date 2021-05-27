@@ -62,7 +62,11 @@ public class JoueurRest {
 		return service.saveOrUpdate(id, request);
 	}
 	
-	
+	@PutMapping("/{id1}/{id}")
+	public String setScoutInJoueur(@PathVariable("id1")long idJoueur, @PathVariable("id") long idScout) {
+		return service.setScoutInJoueur(idJoueur, idScout);
+		
+	}
 	
 	@ExceptionHandler(NoSuchElementException.class)
 	public ResponseEntity<String> handleNoSuchElementException(NoSuchElementException e) {
