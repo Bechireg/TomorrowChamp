@@ -110,7 +110,7 @@ public class JoueurServiceImpl implements JoueurService {
 		Joueur newJoueur = mapper.map(joueur, Joueur.class);
 		newJoueur.setId(idJoueur);
 		newJoueur.setAdresse(joueur.get().getAdresse());
-		newJoueur.setDisponibilite(joueur.get().isDisponibilite());
+		newJoueur.setDisponibilite(false);
 		newJoueur.setCaracteristique(joueur.get().getCaracteristique());
 		newJoueur.setNationalite(joueur.get().getNationalite());
 		newJoueur.setNom(joueur.get().getNom());
@@ -121,6 +121,7 @@ public class JoueurServiceImpl implements JoueurService {
 		
 		//repoScout.save(mapper.map(scout, Scout.class));
 		return "Joueur ajouter avec succes!";
+		
 		}else {
 			return "Joueur indisponible !";
 		}
