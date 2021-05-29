@@ -42,32 +42,10 @@ public class ScouterviceImpl implements ScoutService {
 	@Override
 	public ScoutResponse createScoutEntity(ScoutRequest scout) {
 		
-		
 		Scout entity = mapper.map(scout, Scout.class);
-		Scout newEntity = repoScout.save(entity);
+		repoScout.save(entity);
 		ScoutResponse res=new ScoutResponse(scout.getNom(),scout.getPrenom(),scout.getEmail(),scout.getPassword(),scout.getJoueurs());
 		return res;
-		/*if(scout.getJoueurs()==null) {
-			System.out.println("liste vide");
-			return null;
-		}
-		else {
-			List<Joueur> listeJoueurs=scout.getJoueurs();
-			List<Joueur> joueurRecommande=new ArrayList<>();
-			for (Joueur joueur : listeJoueurs) {
-				if(repoJoueur.findById(joueur.getId())==null) {
-					repoJoueur.save(joueur);
-					joueurRecommande.add(joueur);
-				}else {
-					joueurRecommande.add(joueur);
-				}
-			}
-			entity.setJoueursRecommandé(joueurRecommande);
-			entity=repoScout.save(entity);
-			
-			return mapper.map(entity, ScoutResponse.class);
-		}*/
-		
 	}
 
 	@Override
@@ -107,7 +85,7 @@ public class ScouterviceImpl implements ScoutService {
 			test.setJoueursRecommandé(request.getJoueurs());
 		
 		
-		Scout newScout = mapper.map(test, Scout.class);//mapper.map(test, Client.class);
+		Scout newScout = mapper.map(test, Scout.class);
 		newScout.setId(id);
 		newScout.setPassword(test.getPassword());
 		repoScout.save(newScout);
@@ -118,19 +96,4 @@ public class ScouterviceImpl implements ScoutService {
 	
 		return test;
 	}
-/*
-	@Override
-	public String setScoutInJoueur(long idJoueur, long idScout) {
-		Optional<Joueur> joueur=repoJoueur.findById(idJoueur);
-		Optional<Scout> scout=repoScout.findById(idScout);
-		Joueur jou=mapper.map(joueur, Joueur.class);
-		scout.get().add(jou);
-		Scout scou=mapper.map(scout, Scout.class);
-		repoScout.save(scou);
-		return "tt";
-	}*/
-	
-	
-	
-
 }

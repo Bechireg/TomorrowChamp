@@ -21,7 +21,6 @@ public class PartieResponse {
 
 	public PartieResponse() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public PartieResponse(String stade, List<Joueur> joueurs) {

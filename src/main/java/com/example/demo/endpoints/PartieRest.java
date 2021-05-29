@@ -8,7 +8,6 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,61 +20,52 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.JoueurRequest;
 import com.example.demo.dto.JoueurResponse;
+import com.example.demo.dto.PartieRequest;
+import com.example.demo.dto.PartieResponse;
 import com.example.demo.models.Joueur;
+import com.example.demo.models.Partie;
 import com.example.demo.services.JoueurService;
+import com.example.demo.services.PartieService;
 
 @RestController
-@RequestMapping("/api/joueurs")
-public class JoueurRest {
-	
-	private JoueurService service;
+@RequestMapping("/api/parties")
+public class PartieRest {
+
+private PartieService service;
 	
 	@Autowired
-	public JoueurRest(JoueurService service) {
+	public PartieRest(PartieService service) {
 		super();
 		this.service = service;
 	}
 	
 	@GetMapping
-	public List<Joueur> getAll(){
-		return service.getAllJoueurs();
+	public List<Partie> getAll(){
+		return service.getAllParties();
 	}
 	
 	@GetMapping("/{id}")
-	public JoueurResponse getJoueurById(@PathVariable("id") long id){
-		return service.getJoueurById(id);
+	public PartieResponse getPartieById(@PathVariable("id") long id){
+		return service.getPartieById(id);
 	}
 	
-	
 	@PostMapping
-	public JoueurResponse createJoueurEntity(@Valid @RequestBody JoueurRequest joueur){
-		return service.createJoueurEntity(joueur);
+	public PartieResponse createPartieEntity(@Valid @RequestBody PartieRequest partie){
+		return service.createPartieEntity(partie);
 	}
 	
 	@DeleteMapping("/{id}")
-	public JoueurResponse deleteJoueurById(@PathVariable("id") long id) {
-		return service.deleteJoueurById(id);
+	public PartieResponse deletePartieById(@PathVariable("id") long id) {
+		return service.deletePartieById(id);
 	}
 	
-	@PutMapping("/{id}")
+	/*@PutMapping("/{id}")
 	public JoueurResponse updateJoueur(@PathVariable("id") long id, @RequestBody JoueurRequest request) {
 		return service.saveOrUpdate(id, request);
-	}
-	
-	@PutMapping("/{id1}/{id}")
-	public String setScoutInJoueur(@PathVariable("id1")long idJoueur, @PathVariable("id") long idScout) {
-		return service.setScoutInJoueur(idJoueur, idScout);
-		
-	}
-	
-	@PutMapping("/parties/{id1}/{id}")
-	public JoueurResponse setJoueursInParties(@PathVariable("id1") long idJoueur ,@PathVariable("id") long id){
-		return service.setJoueursInParties(idJoueur,id);
-	}
+	}*/
 	
 	@ExceptionHandler(NoSuchElementException.class)
 	public ResponseEntity<String> handleNoSuchElementException(NoSuchElementException e) {
 		return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
 	}
-
 }

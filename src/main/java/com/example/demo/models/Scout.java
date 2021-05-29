@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.example.demo.dto.JoueurResponse;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 import lombok.Getter;
@@ -27,6 +28,7 @@ public class Scout {
 	private String email;
 	private String password;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "scout", cascade = CascadeType.REMOVE)
 	private List<Joueur> JoueursRecommandé;
 

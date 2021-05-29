@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 import lombok.Getter;
 
@@ -36,7 +38,8 @@ public class Joueur {
 	@OneToMany(mappedBy = "joueur", cascade = CascadeType.REMOVE)
 	private List<Video> videos;
 	
-	@ManyToMany(mappedBy = "joueurs", cascade = CascadeType.REMOVE)
+	
+	@ManyToMany(mappedBy = "joueurs", cascade = CascadeType.ALL)
 	private List<Partie> parties;
 	
 	

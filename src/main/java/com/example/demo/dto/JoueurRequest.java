@@ -1,8 +1,12 @@
 package com.example.demo.dto;
 
+import java.util.List;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+
+import com.example.demo.models.Partie;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,6 +28,14 @@ public class JoueurRequest {
 	//@Pattern(regexp = "[a-zA-Z ]+", message = "nationalite must contain only characters")
 	private String nationalite;
 	private boolean disponibilite;
+	private List<Partie> parties;
+	
+	public List<Partie> getParties() {
+		return parties;
+	}
+	public void setParties(List<Partie> parties) {
+		this.parties = parties;
+	}
 	public String getNom() {
 		return nom;
 	}

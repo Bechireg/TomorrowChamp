@@ -1,5 +1,6 @@
 package com.example.demo.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -11,8 +12,10 @@ import org.springframework.stereotype.Service;
 import com.example.demo.dto.JoueurRequest;
 import com.example.demo.dto.JoueurResponse;
 import com.example.demo.models.Joueur;
+import com.example.demo.models.Partie;
 import com.example.demo.models.Scout;
 import com.example.demo.repositories.JoueurRepository;
+import com.example.demo.repositories.PartieRepository;
 import com.example.demo.repositories.ScoutRepository;
 
 
@@ -21,13 +24,15 @@ public class JoueurServiceImpl implements JoueurService {
 	
 	private JoueurRepository repoJoueur;
 	private ScoutRepository repoScout;
+	private PartieRepository repoPartie;
 	private ModelMapper mapper;
 
 	@Autowired
-	public JoueurServiceImpl(JoueurRepository repoJoueur,ModelMapper mapper,ScoutRepository repoScout) {
+	public JoueurServiceImpl(JoueurRepository repoJoueur,ModelMapper mapper,ScoutRepository repoScout,PartieRepository repoPartie) {
 		super();
 		this.repoJoueur=repoJoueur;
 		this.repoScout=repoScout;
+		this.repoPartie=repoPartie;
 		this.mapper=mapper;
 	}
 	
@@ -94,6 +99,11 @@ public class JoueurServiceImpl implements JoueurService {
 		Scout newScout=mapper.map(scout, Scout.class);
 		
 		newScout.setId(idScout);
+		newScout.setEmail(scout.get().getEmail());
+		newScout.setNom(scout.get().getNom());
+		newScout.setPrenom(scout.get().getPrenom());
+		newScout.setPassword(scout.get().getPassword());
+	
 		//joueur.get().setScout(newScout);
 		//joueur.get().setId(idJoueur);
 		
@@ -108,6 +118,7 @@ public class JoueurServiceImpl implements JoueurService {
 		newJoueur.setPassword(joueur.get().getPassword());
 		newJoueur.setScout(newScout);
 		repoJoueur.save(newJoueur);
+		
 		//repoScout.save(mapper.map(scout, Scout.class));
 		return "Joueur ajouter avec succes!";
 		}else {
@@ -124,6 +135,50 @@ public class JoueurServiceImpl implements JoueurService {
 		JoueurResponse res=new JoueurResponse(joueur.getNom(),joueur.getPrenom(),joueur.getAdresse(),joueur.getNationalite(),joueur.isDisponibilite());
 		return res;
 	}
+
+
+	@Override
+	public JoueurResponse setJoueursInParties(long idJoueur , long id) {
+		//mappage de joueur
+		Optional<Joueur> joueur = repoJoueur.findById(idJoueur);
+		Joueur entity = new Joueur();
+		entity.setId(idJoueur);
+		entity.setAdresse(joueur.get().getAdresse());
+		entity.setDisponibilite(joueur.get().isDisponibilite());
+		entity.setCaracteristique(joueur.get().getCaracteristique());
+		entity.setNationalite(joueur.get().getNationalite());
+		entity.setNom(joueur.get().getNom());
+		entity.setPrenom(joueur.get().getPrenom());
+		entity.setPassword(joueur.get().getPassword());
+		//mappage de partie
+		Optional<Partie> p=repoPartie.findById(id);
+		Partie partie = new Partie();
+		partie.setId(id);
+		partie.setJoueurs(p.get().getJoueurs());
+		partie.setStade(p.get().getStade());
+
+		if(entity.getParties()==null) {
+			List<Partie> ListPartie = new ArrayList<>();
+			ListPartie.add(partie);
+			entity.setParties(ListPartie);
+		}else {
+			entity.getParties().add(partie);
+		}
+		if(partie.getJoueurs()==null) {
+			List<Joueur> ListJoueur = new ArrayList<>();
+			ListJoueur.add(entity);
+			partie.setJoueurs(ListJoueur);
+		}else {
+			partie.getJoueurs().add(entity);
+		}
+
+		repoJoueur.save(entity);
+		repoPartie.save(partie);
+		
+		return mapper.map(entity, JoueurResponse.class);
+	}
+	
+	
 	
 	
 }

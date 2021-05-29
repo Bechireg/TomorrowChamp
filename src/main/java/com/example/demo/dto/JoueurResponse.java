@@ -1,5 +1,9 @@
 package com.example.demo.dto;
 
+import java.util.List;
+
+import com.example.demo.models.Partie;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -19,6 +23,7 @@ public class JoueurResponse {
 	private String password;
 	private String nationalite;
 	private boolean disponibilite;
+	private List<Partie> parties;
 	
 	
 	public JoueurResponse() {

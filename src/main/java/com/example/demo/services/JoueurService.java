@@ -14,4 +14,7 @@ public interface JoueurService {
 	JoueurResponse saveOrUpdate(long id,JoueurRequest joueur);
 
 	String setScoutInJoueur(long idJoueur ,long idScout );
+	
+	
+	JoueurResponse setJoueursInParties(long idJoueur , long id);
 }

@@ -13,6 +13,12 @@ public class ScoutResponse {
 	private List<Joueur> JoueursRecommandé;
 	
 	
+	
+	public ScoutResponse() {
+		super();
+	}
+
+
 	public ScoutResponse(String nom, String prenom, String email, String password,
 			List<Joueur> joueursRecommandé) {
 		super();

@@ -6,6 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 @Data
@@ -28,6 +30,7 @@ public class Caracteristique {
 	private int tir;
 	
 	
+	@JsonIgnore
 	@OneToOne
 	private Joueur joueur;
 	
