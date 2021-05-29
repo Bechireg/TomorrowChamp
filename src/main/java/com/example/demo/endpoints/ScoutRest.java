@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.ScoutRequest;
 import com.example.demo.dto.ScoutResponse;
-
+import com.example.demo.models.Joueur;
 import com.example.demo.models.Scout;
 
 import com.example.demo.services.ScoutService;
@@ -68,6 +68,11 @@ public class ScoutRest {
 	@PutMapping("/{id}")
 	public ScoutResponse updateScout(@PathVariable("id") long id, @RequestBody ScoutRequest request) {
 		return service.saveOrUpdate(id, request);
+	}
+	
+	@GetMapping("/favoris/{id}")
+	public List<Joueur> getListFavoris(@PathVariable("id")long id){
+		return service.getListeFavoris(id);
 	}
 	
 	

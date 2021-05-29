@@ -17,4 +17,5 @@ public interface JoueurService {
 	
 	
 	JoueurResponse setJoueursInParties(long idJoueur , long id);
+	JoueurResponse deleteScoutfromJoueur(long idJoueur,long idScout);
 }

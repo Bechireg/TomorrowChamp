@@ -14,5 +14,6 @@ public interface CaracteristiqueService {
 	List<Caracteristique> getAllCaracteristiques();
 	CaracteristiqueResponse createCaracteristiqueEntity(long id,CaracteristiqueRequest carac);
 	CaracteristiqueResponse getCaracteristiqueById(long id);
+	CaracteristiqueResponse update(long id,CaracteristiqueRequest req);
 
 }

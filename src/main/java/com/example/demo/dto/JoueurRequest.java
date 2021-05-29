@@ -6,6 +6,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import com.example.demo.models.Caracteristique;
 import com.example.demo.models.Partie;
 
 import lombok.AllArgsConstructor;
@@ -29,31 +30,81 @@ public class JoueurRequest {
 	private String nationalite;
 	private boolean disponibilite;
 	private List<Partie> parties;
+	private Caracteristique caracteristique;
 	
+	
+	
+	public JoueurRequest() {
+		super();
+		
+	}
+	
+	
+	public JoueurRequest(String nom, String prenom, String adresse, String password, String nationalite,
+			boolean disponibilite, List<Partie> parties, Caracteristique caracteristique) {
+		super();
+		this.nom = nom;
+		this.prenom = prenom;
+		this.adresse = adresse;
+		this.password = password;
+		this.nationalite = nationalite;
+		this.disponibilite = disponibilite;
+		this.parties = parties;
+		this.caracteristique = caracteristique;
+	}
+
+
+	public String getNom() {
+		return nom;
+	}
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+	public String getPrenom() {
+		return prenom;
+	}
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
+	}
+	public String getAdresse() {
+		return adresse;
+	}
+	public void setAdresse(String adresse) {
+		this.adresse = adresse;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public String getNationalite() {
+		return nationalite;
+	}
+	public void setNationalite(String nationalite) {
+		this.nationalite = nationalite;
+	}
+	public boolean isDisponibilite() {
+		return disponibilite;
+	}
+	public void setDisponibilite(boolean disponibilite) {
+		this.disponibilite = disponibilite;
+	}
 	public List<Partie> getParties() {
 		return parties;
 	}
 	public void setParties(List<Partie> parties) {
 		this.parties = parties;
 	}
-	public String getNom() {
-		return nom;
+	public Caracteristique getCaracteristique() {
+		return caracteristique;
 	}
-	public String getPrenom() {
-		return prenom;
+	public void setCaracteristique(Caracteristique caracteristique) {
+		this.caracteristique = caracteristique;
 	}
-	public String getAdresse() {
-		return adresse;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public String getNationalite() {
-		return nationalite;
-	}
-	public boolean isDisponibilite() {
-		return disponibilite;
-	}
+
+	
+	
 	
 	
 

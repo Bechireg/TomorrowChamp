@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.example.demo.dto.ScoutRequest;
 import com.example.demo.dto.ScoutResponse;
+import com.example.demo.models.Joueur;
 import com.example.demo.models.Scout;
 
 
@@ -15,6 +16,8 @@ public interface ScoutService {
 	ScoutResponse getScoutById(long id);
 	ScoutResponse deleteScoutById(long id);
 	ScoutResponse saveOrUpdate(long id,ScoutRequest scout);
+	
+	List<Joueur> getListeFavoris(long id); 
 	
 	//String setScoutInJoueur(long idJoueur ,long idScout );
 

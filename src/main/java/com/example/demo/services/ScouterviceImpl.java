@@ -96,4 +96,21 @@ public class ScouterviceImpl implements ScoutService {
 	
 		return test;
 	}
+
+	@Override
+	public List<Joueur> getListeFavoris(long id) {
+		
+		List<Joueur> listefavoris=new ArrayList<>();
+		for (Joueur joueur : repoJoueur.findAll()) {
+			if(joueur.getScout()!=null) {
+				if(joueur.getScout().getId()==id)
+					listefavoris.add(joueur);
+			}
+			
+		}
+		
+		return listefavoris;
+	}
+	
+	
 }

@@ -59,7 +59,7 @@ public class JoueurServiceImpl implements JoueurService {
 	@Override
 	public JoueurResponse deleteJoueurById(long id) {
 		Optional<Joueur> joueur = repoJoueur.findById(id);
-		JoueurResponse res=new JoueurResponse(joueur.get().getNom(), joueur.get().getPrenom(), joueur.get().getAdresse(), joueur.get().getNationalite(), joueur.get().isDisponibilite());
+		JoueurResponse res=new JoueurResponse(joueur.get().getNom(),joueur.get().getPrenom(), joueur.get().getAdresse(),joueur.get().getPassword(),joueur.get().getNationalite(),joueur.get().isDisponibilite(),joueur.get().getParties(),joueur.get().getCaracteristique());
 		repoJoueur.deleteById(id);
 		return res;
 
@@ -103,9 +103,6 @@ public class JoueurServiceImpl implements JoueurService {
 		newScout.setNom(scout.get().getNom());
 		newScout.setPrenom(scout.get().getPrenom());
 		newScout.setPassword(scout.get().getPassword());
-	
-		//joueur.get().setScout(newScout);
-		//joueur.get().setId(idJoueur);
 		
 		Joueur newJoueur = mapper.map(joueur, Joueur.class);
 		newJoueur.setId(idJoueur);
@@ -119,7 +116,6 @@ public class JoueurServiceImpl implements JoueurService {
 		newJoueur.setScout(newScout);
 		repoJoueur.save(newJoueur);
 		
-		//repoScout.save(mapper.map(scout, Scout.class));
 		return "Joueur ajouter avec succes!";
 		
 		}else {
@@ -133,7 +129,7 @@ public class JoueurServiceImpl implements JoueurService {
 	
 		Joueur entity = mapper.map(joueur, Joueur.class);
 		Joueur newEntity = repoJoueur.save(entity);
-		JoueurResponse res=new JoueurResponse(joueur.getNom(),joueur.getPrenom(),joueur.getAdresse(),joueur.getNationalite(),joueur.isDisponibilite());
+		JoueurResponse res=new JoueurResponse(joueur.getNom(),joueur.getPrenom(),joueur.getAdresse(),joueur.getPassword(),joueur.getNationalite(), joueur.isDisponibilite(), joueur.getParties(), joueur.getCaracteristique());
 		return res;
 	}
 
@@ -177,6 +173,27 @@ public class JoueurServiceImpl implements JoueurService {
 		repoPartie.save(partie);
 		
 		return mapper.map(entity, JoueurResponse.class);
+	}
+
+
+	@Override
+	public JoueurResponse deleteScoutfromJoueur(long idJoueur, long idScout) {
+		Optional<Joueur> j = repoJoueur.findById(idJoueur);
+		Joueur joueur=new Joueur();
+		if(j.get().getScout().getId()==idScout) {
+			joueur.setId(idJoueur);
+			joueur.setAdresse(j.get().getAdresse());
+			
+			joueur.setCaracteristique(j.get().getCaracteristique());
+			joueur.setNationalite(j.get().getNationalite());
+			joueur.setNom(j.get().getNom());
+			joueur.setPrenom(j.get().getPrenom());
+			
+			joueur.setScout(null);
+			joueur.setDisponibilite(true);
+		}
+		repoJoueur.save(joueur);
+		return mapper.map(joueur, JoueurResponse.class);
 	}
 	
 	

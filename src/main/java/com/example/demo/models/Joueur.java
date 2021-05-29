@@ -42,7 +42,7 @@ public class Joueur {
 	@ManyToMany(mappedBy = "joueurs", cascade = CascadeType.ALL)
 	private List<Partie> parties;
 	
-	
+	@JsonIgnore
 	@ManyToOne(cascade=CascadeType.ALL)
 	private Scout scout;
 

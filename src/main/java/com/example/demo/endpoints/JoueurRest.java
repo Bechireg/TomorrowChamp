@@ -73,6 +73,12 @@ public class JoueurRest {
 		return service.setJoueursInParties(idJoueur,id);
 	}
 	
+	@PutMapping("/deletescout/{id1}/{id}")
+	public JoueurResponse deleteScoutfromJoueur(@PathVariable("id1")long idJoueur, @PathVariable("id") long idScout) {
+		return service.deleteScoutfromJoueur(idJoueur, idScout);
+		
+	}
+	
 	@ExceptionHandler(NoSuchElementException.class)
 	public ResponseEntity<String> handleNoSuchElementException(NoSuchElementException e) {
 		return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
