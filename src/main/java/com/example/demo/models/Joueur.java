@@ -32,7 +32,7 @@ public class Joueur {
 	private String nationalite;
 	private boolean disponibilite;
 	
-	@OneToOne(mappedBy ="joueur")
+	@OneToOne(cascade = CascadeType.REMOVE)
 	private Caracteristique caracteristique;
 	
 	@OneToMany(mappedBy = "joueur", cascade = CascadeType.REMOVE)
