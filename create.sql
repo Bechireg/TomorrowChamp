@@ -8,4 +8,4 @@ alter table detailpartie add constraint FK7eet6u6ahaqnil062bbcvniye foreign key 
 alter table detailpartie add constraint FKdw5o3fo9r2mube6651vrxmyke foreign key (parties_id) references partie (id);
 alter table joueur add constraint FKb1udw1h4u1etfknqabh5n65rb foreign key (caracteristique_id) references caracteristique (id);
 alter table joueur add constraint FKkenxpq9dmt11o6at7j8x42hnf foreign key (scout_id) references scout (id);
-alter table video add constraint FKrx7bxugdg2h5o3nclu9yv2ibi foreign key (joueur_id) references joueur (id);
+alter table video add constraint FKrx7bxugdg2h5o3nclu9yv2ibi foreign key (joueur_id) references joueur (id);alter table caracteristique add column precisions varchar(255)

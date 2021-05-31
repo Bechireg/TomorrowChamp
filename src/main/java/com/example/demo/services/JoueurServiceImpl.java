@@ -48,18 +48,21 @@ public class JoueurServiceImpl implements JoueurService {
 
 		Optional<Joueur> opt = repoJoueur.findById(id);
 		Joueur entity;
-		if(opt.isPresent())
+		if(opt.isPresent()&& opt.get().getCaracteristique()!=null)
 			entity = opt.get();
 		else
 			throw new NoSuchElementException("Joueur with this id is not found");
 		
-		return mapper.map(entity, JoueurResponse.class);
+
+				JoueurResponse j=mapper.map(entity, JoueurResponse.class);
+				j.setCarateristique(entity.getCaracteristique());
+		return j;
 	}
 
 	@Override
 	public JoueurResponse deleteJoueurById(long id) {
 		Optional<Joueur> joueur = repoJoueur.findById(id);
-		JoueurResponse res=new JoueurResponse(joueur.get().getNom(),joueur.get().getPrenom(), joueur.get().getAdresse(),joueur.get().getPassword(),joueur.get().getNationalite(),joueur.get().isDisponibilite(),joueur.get().getParties(),joueur.get().getCaracteristique());
+		JoueurResponse res=new JoueurResponse(joueur.get().getNom(), joueur.get().getPrenom(), joueur.get().getAdresse(),joueur.get().getPassword(),joueur.get().getNationalite(), joueur.get().isDisponibilite(),joueur.get().getParties(),joueur.get().getCaracteristique(),joueur.get().getVideos());
 		repoJoueur.deleteById(id);
 		return res;
 
@@ -78,8 +81,14 @@ public class JoueurServiceImpl implements JoueurService {
 			test.setAdresse(request.getAdresse());
 		if(request.getNationalite()!=null)
 			test.setNationalite(request.getNationalite());
+		if(request.getCaracteristique()!=null)
+			test.setCarateristique(request.getCaracteristique());
+		if(request.getParties()!=null)
+			test.setParties(request.getParties());
+	
 		
-		Joueur newJoueur = mapper.map(test, Joueur.class);//mapper.map(test, Client.class);
+		
+		Joueur newJoueur = mapper.map(test, Joueur.class);
 		newJoueur.setId(id);
 		newJoueur.setPassword(test.getPassword());
 		repoJoueur.save(newJoueur);
@@ -87,6 +96,8 @@ public class JoueurServiceImpl implements JoueurService {
 		test.setPrenom(newJoueur.getPrenom());
 		test.setAdresse(newJoueur.getAdresse());
 		test.setNationalite(newJoueur.getNationalite());
+		test.setCarateristique(newJoueur.getCaracteristique());
+		test.setParties(newJoueur.getParties());
 	
 		return test;
 	}
@@ -128,8 +139,8 @@ public class JoueurServiceImpl implements JoueurService {
 	public JoueurResponse createJoueurEntity(JoueurRequest joueur) {
 	
 		Joueur entity = mapper.map(joueur, Joueur.class);
-		Joueur newEntity = repoJoueur.save(entity);
-		JoueurResponse res=new JoueurResponse(joueur.getNom(),joueur.getPrenom(),joueur.getAdresse(),joueur.getPassword(),joueur.getNationalite(), joueur.isDisponibilite(), joueur.getParties(), joueur.getCaracteristique());
+		repoJoueur.save(entity);
+		JoueurResponse res=new JoueurResponse(entity.getNom(), entity.getPrenom(), entity.getAdresse(), entity.getPassword(),entity.getNationalite() , entity.isDisponibilite(), entity.getParties(),entity.getCaracteristique() ,entity.getVideos());
 		return res;
 	}
 
@@ -188,9 +199,10 @@ public class JoueurServiceImpl implements JoueurService {
 			joueur.setNationalite(j.get().getNationalite());
 			joueur.setNom(j.get().getNom());
 			joueur.setPrenom(j.get().getPrenom());
-			
+			joueur.setParties(j.get().getParties());
 			joueur.setScout(null);
 			joueur.setDisponibilite(true);
+			joueur.setVideos(j.get().getVideos());
 		}
 		repoJoueur.save(joueur);
 		return mapper.map(joueur, JoueurResponse.class);

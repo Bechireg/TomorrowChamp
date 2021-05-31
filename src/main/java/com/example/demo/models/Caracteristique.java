@@ -19,7 +19,7 @@ public class Caracteristique {
 	private long id;
 	private String position;
 	private String piedfort;
-	private String precisio;
+	private String precisions;
 	private int hauteur;
 	private double poids;
 	private int physique;
@@ -167,12 +167,12 @@ public class Caracteristique {
 
 
 	public String getPrecisio() {
-		return precisio;
+		return precisions;
 	}
 
 
 	public void setPrecisio(String precisio) {
-		this.precisio = precisio;
+		this.precisions = precisio;
 	}
 	
 	

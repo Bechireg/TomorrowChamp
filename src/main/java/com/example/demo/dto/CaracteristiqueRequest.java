@@ -13,7 +13,7 @@ public class CaracteristiqueRequest {
 	private String piedfort;
 	private int hauteur;
 	private double poids;
-	private String precisio;
+	private String precisions;
 	private int physique;
 	private int vitesse;
 	private int defense;
@@ -36,7 +36,7 @@ public class CaracteristiqueRequest {
 		this.piedfort = piedfort;
 		this.hauteur = hauteur;
 		this.poids = poids;
-		this.precisio = precisio;
+		this.precisions = precisio;
 		this.physique = physique;
 		this.vitesse = vitesse;
 		this.defense = defense;
@@ -115,10 +115,10 @@ public class CaracteristiqueRequest {
 		this.tir = tir;
 	}
 	public String getPrecisio() {
-		return precisio;
+		return precisions;
 	}
 	public void setPrecisio(String precisio) {
-		this.precisio = precisio;
+		this.precisions = precisio;
 	}
 	
 	

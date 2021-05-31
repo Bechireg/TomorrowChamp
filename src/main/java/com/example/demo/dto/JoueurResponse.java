@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.example.demo.models.Caracteristique;
 import com.example.demo.models.Partie;
+import com.example.demo.models.Video;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,14 +27,17 @@ public class JoueurResponse {
 	private boolean disponibilite;
 	private List<Partie> parties;
 	private Caracteristique carateristique;
+	private List<Video>videos;
 	
 	
 	public JoueurResponse() {
 		super();
 	}
 
+
+
 	public JoueurResponse(String nom, String prenom, String adresse, String password, String nationalite,
-			boolean disponibilite, List<Partie> parties, Caracteristique carateristique) {
+			boolean disponibilite, List<Partie> parties, Caracteristique carateristique, List<Video> list) {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
@@ -43,7 +47,10 @@ public class JoueurResponse {
 		this.disponibilite = disponibilite;
 		this.parties = parties;
 		this.carateristique = carateristique;
+		this.videos = list;
 	}
+
+
 
 	public String getNom() {
 		return nom;
@@ -111,7 +118,15 @@ public class JoueurResponse {
 
 
 
-	
+	public List<Video> getVideos() {
+		return videos;
+	}
+
+
+
+	public void setVideos(List<Video> videos) {
+		this.videos = videos;
+	}
 	
 	
 }

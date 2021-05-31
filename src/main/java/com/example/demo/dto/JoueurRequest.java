@@ -8,6 +8,7 @@ import javax.validation.constraints.Size;
 
 import com.example.demo.models.Caracteristique;
 import com.example.demo.models.Partie;
+import com.example.demo.models.Video;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -31,17 +32,17 @@ public class JoueurRequest {
 	private boolean disponibilite;
 	private List<Partie> parties;
 	private Caracteristique caracteristique;
-	
-	
+	private List<Video> videos;
 	
 	public JoueurRequest() {
 		super();
 		
 	}
-	
-	
+
+
+
 	public JoueurRequest(String nom, String prenom, String adresse, String password, String nationalite,
-			boolean disponibilite, List<Partie> parties, Caracteristique caracteristique) {
+			boolean disponibilite, List<Partie> parties, Caracteristique caracteristique, List<Video> videos) {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
@@ -51,7 +52,9 @@ public class JoueurRequest {
 		this.disponibilite = disponibilite;
 		this.parties = parties;
 		this.caracteristique = caracteristique;
+		this.videos = videos;
 	}
+
 
 
 	public String getNom() {
@@ -102,10 +105,10 @@ public class JoueurRequest {
 	public void setCaracteristique(Caracteristique caracteristique) {
 		this.caracteristique = caracteristique;
 	}
-
-	
-	
-	
-	
-
+	public List<Video> getVideos() {
+		return videos;
+	}
+	public void setVideos(List<Video> videos) {
+		this.videos = videos;
+	}
 }
