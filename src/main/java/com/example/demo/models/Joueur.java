@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import org.hibernate.validator.constraints.UniqueElements;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
@@ -27,6 +29,7 @@ public class Joueur {
 	private long id;
 	private String nom;
 	private String prenom;
+	//@UniqueElements
 	private String adresse;
 	private String password;
 	private String nationalite;
