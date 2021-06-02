@@ -136,12 +136,23 @@ public class JoueurServiceImpl implements JoueurService {
 
 
 	@Override
-	public JoueurResponse createJoueurEntity(JoueurRequest joueur) {
-	
-		Joueur entity = mapper.map(joueur, Joueur.class);
-		repoJoueur.save(entity);
-		JoueurResponse res=new JoueurResponse(entity.getNom(), entity.getPrenom(), entity.getAdresse(), entity.getPassword(),entity.getNationalite() , entity.isDisponibilite(), entity.getParties(),entity.getCaracteristique() ,entity.getVideos());
-		return res;
+	public JoueurResponse createJoueurEntity(JoueurRequest joueur){
+		boolean trouver = false;
+		for (Joueur item : repoJoueur.findAll()) {
+			if(item.getAdresse().equals(joueur.getAdresse())) {
+				trouver=true;
+				break;
+			}
+		}
+		if(trouver==false) {
+			Joueur entity = mapper.map(joueur, Joueur.class);
+			repoJoueur.save(entity);
+			JoueurResponse res=new JoueurResponse(entity.getNom(), entity.getPrenom(), entity.getAdresse(), entity.getPassword(),entity.getNationalite() , entity.isDisponibilite(), entity.getParties(),entity.getCaracteristique() ,entity.getVideos());
+			return res;
+		}else {
+			throw new NoSuchElementException("Joueur with this email exist in DB!");
+		}
+
 	}
 
 

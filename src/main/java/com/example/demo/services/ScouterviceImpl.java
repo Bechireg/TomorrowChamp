@@ -41,11 +41,22 @@ public class ScouterviceImpl implements ScoutService {
 
 	@Override
 	public ScoutResponse createScoutEntity(ScoutRequest scout) {
-		
-		Scout entity = mapper.map(scout, Scout.class);
-		repoScout.save(entity);
-		ScoutResponse res=new ScoutResponse(scout.getNom(),scout.getPrenom(),scout.getEmail(),scout.getPassword(),scout.getJoueurs());
-		return res;
+		boolean trouver = false;
+		for (Scout item : repoScout.findAll()) {
+			if(item.getEmail().equals(scout.getEmail())) {
+				trouver=true;
+				break;
+			}
+		}
+		if(trouver==false) {
+			Scout entity = mapper.map(scout, Scout.class);
+			repoScout.save(entity);
+			ScoutResponse res=new ScoutResponse(scout.getNom(),scout.getPrenom(),scout.getEmail(),scout.getPassword(),scout.getJoueurs());
+			return res;
+		}else {
+			throw new NoSuchElementException("Scout with this email exist in DB!");
+		}
+
 	}
 
 	@Override

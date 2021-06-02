@@ -6,6 +6,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.UniqueElements;
+
 import com.example.demo.models.Caracteristique;
 import com.example.demo.models.Partie;
 import com.example.demo.models.Video;
@@ -25,6 +27,7 @@ public class JoueurRequest {
 	private String nom;
 	//@NotBlank(message = "Prenom must be not Empty")
 	private String prenom;
+	
 	private String adresse;
 	private String password;
 	//@Pattern(regexp = "[a-zA-Z ]+", message = "nationalite must contain only characters")

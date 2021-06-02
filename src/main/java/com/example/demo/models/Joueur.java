@@ -29,7 +29,7 @@ public class Joueur {
 	private long id;
 	private String nom;
 	private String prenom;
-	//@UniqueElements
+	
 	private String adresse;
 	private String password;
 	private String nationalite;
