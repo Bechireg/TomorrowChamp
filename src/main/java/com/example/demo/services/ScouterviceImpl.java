@@ -50,9 +50,10 @@ public class ScouterviceImpl implements ScoutService {
 		}
 		if(trouver==false) {
 			Scout entity = mapper.map(scout, Scout.class);
-			repoScout.save(entity);
-			ScoutResponse res=new ScoutResponse(scout.getNom(),scout.getPrenom(),scout.getEmail(),scout.getPassword(),scout.getJoueurs());
-			return res;
+			entity=repoScout.save(entity);
+			//ScoutResponse res=new ScoutResponse(scout.getNom(),scout.getPrenom(),scout.getEmail(),scout.getPassword(),scout.getJoueurs());
+			ScoutResponse scoutResponse=mapper.map(entity, ScoutResponse.class);
+			return scoutResponse;
 		}else {
 			throw new NoSuchElementException("Scout with this email exist in DB!");
 		}
@@ -76,8 +77,9 @@ public class ScouterviceImpl implements ScoutService {
 	public ScoutResponse deleteScoutById(long id) {
 		
 		Optional<Scout> scout = repoScout.findById(id);
-		ScoutResponse res=new ScoutResponse(scout.get().getNom(), scout.get().getPrenom(), scout.get().getEmail(),scout.get().getPassword(), scout.get().getJoueursRecommandé());
+		//ScoutResponse res=new ScoutResponse(scout.get().getNom(), scout.get().getPrenom(), scout.get().getEmail(),scout.get().getPassword(), scout.get().getJoueursRecommandé());
 		repoScout.deleteById(id);
+		ScoutResponse res = mapper.map(scout, ScoutResponse.class);
 		return res;
 	}
 

@@ -1,9 +1,11 @@
 package com.example.demo.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.example.demo.models.Caracteristique;
 import com.example.demo.models.Partie;
+import com.example.demo.models.Role;
 import com.example.demo.models.Video;
 
 import lombok.AllArgsConstructor;
@@ -12,10 +14,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 
+
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
-@Getter
 public class JoueurResponse {
 
 	
@@ -28,16 +30,15 @@ public class JoueurResponse {
 	private List<Partie> parties;
 	private Caracteristique carateristique;
 	private List<Video>videos;
+	private Role Roles;
 	
-	
-	public JoueurResponse() {
+	/*public JoueurResponse() {
 		super();
 	}
 
-
-
 	public JoueurResponse(String nom, String prenom, String adresse, String password, String nationalite,
-			boolean disponibilite, List<Partie> parties, Caracteristique carateristique, List<Video> list) {
+			boolean disponibilite, List<Partie> parties, Caracteristique carateristique, List<Video> videos,
+			ArrayList<Role> roles) {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
@@ -47,10 +48,9 @@ public class JoueurResponse {
 		this.disponibilite = disponibilite;
 		this.parties = parties;
 		this.carateristique = carateristique;
-		this.videos = list;
+		this.videos = videos;
+		Roles = roles;
 	}
-
-
 
 	public String getNom() {
 		return nom;
@@ -127,6 +127,18 @@ public class JoueurResponse {
 	public void setVideos(List<Video> videos) {
 		this.videos = videos;
 	}
-	
+
+
+
+	public ArrayList<Role> getRoles() {
+		return Roles;
+	}
+
+
+
+	public void setRoles(ArrayList<Role> roles) {
+		Roles = roles;
+	}
+	*/
 	
 }

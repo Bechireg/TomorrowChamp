@@ -9,10 +9,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
-@Getter
+
 public class PartieResponse {
 	
 	private String stade;

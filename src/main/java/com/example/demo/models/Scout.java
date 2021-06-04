@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,11 +15,14 @@ import javax.persistence.OneToMany;
 import com.example.demo.dto.JoueurResponse;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 @Entity
 @Data
-@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Scout {
 	
 	@Id
@@ -27,11 +32,14 @@ public class Scout {
 	private String prenom;
 	private String email;
 	private String password;
-	
+	@Enumerated(EnumType.STRING)
+	private Role Roles;
 	@JsonIgnore
 	@OneToMany(mappedBy = "scout", cascade = CascadeType.REMOVE)
 	private List<Joueur> JoueursRecommandé;
-
+	
+	
+/*
 	public long getId() {
 		return id;
 	}
@@ -80,11 +88,15 @@ public class Scout {
 	public void setJoueursRecommandé(List<Joueur> joueursRecommandé) {
 		JoueursRecommandé = joueursRecommandé;
 	}
-	
-	/*public void add(Joueur joueur) {
-		JoueursRecommandé.add(joueur);
+
+	public ArrayList<Role> getRoles() {
+		return Roles;
+	}
+
+	public void setRoles(ArrayList<Role> roles) {
+		Roles = roles;
 	}*/
 	
-	
+
 
 }

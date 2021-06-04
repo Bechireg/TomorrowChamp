@@ -1,5 +1,6 @@
 package com.example.demo.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.constraints.NotBlank;
@@ -10,6 +11,7 @@ import org.hibernate.validator.constraints.UniqueElements;
 
 import com.example.demo.models.Caracteristique;
 import com.example.demo.models.Partie;
+import com.example.demo.models.Role;
 import com.example.demo.models.Video;
 
 import lombok.AllArgsConstructor;
@@ -36,8 +38,9 @@ public class JoueurRequest {
 	private List<Partie> parties;
 	private Caracteristique caracteristique;
 	private List<Video> videos;
+	private Role Roles;
 	
-	public JoueurRequest() {
+	/*public JoueurRequest() {
 		super();
 		
 	}
@@ -113,5 +116,5 @@ public class JoueurRequest {
 	}
 	public void setVideos(List<Video> videos) {
 		this.videos = videos;
-	}
+	}*/
 }

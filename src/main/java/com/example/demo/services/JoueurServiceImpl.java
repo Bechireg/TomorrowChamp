@@ -62,7 +62,7 @@ public class JoueurServiceImpl implements JoueurService {
 	@Override
 	public JoueurResponse deleteJoueurById(long id) {
 		Optional<Joueur> joueur = repoJoueur.findById(id);
-		JoueurResponse res=new JoueurResponse(joueur.get().getNom(), joueur.get().getPrenom(), joueur.get().getAdresse(),joueur.get().getPassword(),joueur.get().getNationalite(), joueur.get().isDisponibilite(),joueur.get().getParties(),joueur.get().getCaracteristique(),joueur.get().getVideos());
+		JoueurResponse res=mapper.map(joueur, JoueurResponse.class);
 		repoJoueur.deleteById(id);
 		return res;
 
@@ -146,8 +146,8 @@ public class JoueurServiceImpl implements JoueurService {
 		}
 		if(trouver==false) {
 			Joueur entity = mapper.map(joueur, Joueur.class);
-			repoJoueur.save(entity);
-			JoueurResponse res=new JoueurResponse(entity.getNom(), entity.getPrenom(), entity.getAdresse(), entity.getPassword(),entity.getNationalite() , entity.isDisponibilite(), entity.getParties(),entity.getCaracteristique() ,entity.getVideos());
+			entity=repoJoueur.save(entity);
+			JoueurResponse res=mapper.map(entity, JoueurResponse.class);
 			return res;
 		}else {
 			throw new NoSuchElementException("Joueur with this email exist in DB!");

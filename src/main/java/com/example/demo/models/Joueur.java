@@ -1,9 +1,12 @@
 package com.example.demo.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,16 +15,17 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-import org.hibernate.validator.constraints.UniqueElements;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Joueur {
 	
 	@Id
@@ -29,16 +33,16 @@ public class Joueur {
 	private long id;
 	private String nom;
 	private String prenom;
-	
 	private String adresse;
 	private String password;
 	private String nationalite;
 	private boolean disponibilite;
-	
+	@Enumerated(EnumType.STRING)
+	private Role Roles;
 	@OneToOne(cascade = CascadeType.REMOVE)
 	private Caracteristique caracteristique;
 	
-	@OneToMany(mappedBy = "joueur", cascade = CascadeType.REMOVE)
+	@OneToMany(mappedBy = "joueur",cascade = CascadeType.ALL)
 	private List<Video> videos;
 	
 	
@@ -49,7 +53,7 @@ public class Joueur {
 	@ManyToOne(cascade=CascadeType.ALL)
 	private Scout scout;
 
-	public long getId() {
+	/*public long getId() {
 		return id;
 	}
 
@@ -136,6 +140,15 @@ public class Joueur {
 	public void setScout(Scout scout) {
 		this.scout = scout;
 	}
+
+	public ArrayList<Role> getRoles() {
+		return Roles;
+	}
+
+	public void setRoles(ArrayList<Role> roles) {
+		Roles = roles;
+	}
+*/
 
 	
 

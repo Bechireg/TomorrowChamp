@@ -1,9 +1,18 @@
 package com.example.demo.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.example.demo.models.Joueur;
+import com.example.demo.models.Role;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class ScoutResponse {
 
 	private String nom;
@@ -11,24 +20,23 @@ public class ScoutResponse {
 	private String email;
 	private String password;
 	private List<Joueur> JoueursRecommandé;
+	private ArrayList<Role> Roles;
 	
 	
-	
-	public ScoutResponse() {
+	/*public ScoutResponse() {
 		super();
 	}
 
-
-	public ScoutResponse(String nom, String prenom, String email, String password,
-			List<Joueur> joueursRecommandé) {
+	public ScoutResponse(String nom, String prenom, String email, String password, List<Joueur> joueursRecommandé,
+			ArrayList<Role> roles) {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
 		this.email = email;
 		this.password = password;
 		JoueursRecommandé = joueursRecommandé;
+		Roles = roles;
 	}
-
 
 	public String getNom() {
 		return nom;
@@ -79,6 +87,16 @@ public class ScoutResponse {
 		JoueursRecommandé = joueursRecommandé;
 	}
 
+
+	public ArrayList<Role> getRoles() {
+		return Roles;
+	}
+
+
+	public void setRoles(ArrayList<Role> roles) {
+		Roles = roles;
+	}
+*/
 	
 	
 }

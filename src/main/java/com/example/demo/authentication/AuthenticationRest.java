@@ -1,6 +1,8 @@
 package com.example.demo.authentication;
 
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.context.annotation.Bean;
@@ -27,6 +29,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.dto.JoueurRequest;
+import com.example.demo.dto.JoueurResponse;
+import com.example.demo.services.JoueurService;
+
 @RestController()
 public class AuthenticationRest {
 
@@ -39,6 +45,15 @@ public class AuthenticationRest {
 
 		@Autowired
 		private MyUserDetailsService userDetailsService;
+		
+		@Autowired
+		private JoueurService service;
+		
+		
+		@PostMapping("/Register")
+		public JoueurResponse createJoueurEntity(@Valid @RequestBody JoueurRequest joueur){
+			return service.createJoueurEntity(joueur);
+		}
 
 		@RequestMapping({ "/hello" })
 		public String firstPage() {
@@ -95,7 +110,8 @@ public class AuthenticationRest {
 		@Override
 		protected void configure(HttpSecurity httpSecurity) throws Exception {
 			httpSecurity.csrf().disable()
-					.authorizeRequests().antMatchers("/authenticate").permitAll().
+					.authorizeRequests().antMatchers("/authenticate","/Register")
+					.permitAll().
 							anyRequest().authenticated().and().
 							exceptionHandling().and().sessionManagement()
 					.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
