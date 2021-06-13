@@ -13,6 +13,7 @@ import com.example.demo.dto.JoueurRequest;
 import com.example.demo.dto.JoueurResponse;
 import com.example.demo.models.Joueur;
 import com.example.demo.models.Partie;
+import com.example.demo.models.Role;
 import com.example.demo.models.Scout;
 import com.example.demo.repositories.JoueurRepository;
 import com.example.demo.repositories.PartieRepository;
@@ -146,6 +147,7 @@ public class JoueurServiceImpl implements JoueurService {
 		}
 		if(trouver==false) {
 			Joueur entity = mapper.map(joueur, Joueur.class);
+			entity.setRoles(Role.JOUEUR);
 			entity=repoJoueur.save(entity);
 			JoueurResponse res=mapper.map(entity, JoueurResponse.class);
 			return res;
