@@ -13,6 +13,7 @@ import com.example.demo.dto.JoueurResponse;
 import com.example.demo.dto.ScoutRequest;
 import com.example.demo.dto.ScoutResponse;
 import com.example.demo.models.Joueur;
+import com.example.demo.models.Role;
 import com.example.demo.models.Scout;
 import com.example.demo.repositories.JoueurRepository;
 import com.example.demo.repositories.ScoutRepository;
@@ -50,6 +51,7 @@ public class ScouterviceImpl implements ScoutService {
 		}
 		if(trouver==false) {
 			Scout entity = mapper.map(scout, Scout.class);
+			entity.setRoles(Role.SCOUT);
 			entity=repoScout.save(entity);
 			//ScoutResponse res=new ScoutResponse(scout.getNom(),scout.getPrenom(),scout.getEmail(),scout.getPassword(),scout.getJoueurs());
 			ScoutResponse scoutResponse=mapper.map(entity, ScoutResponse.class);
